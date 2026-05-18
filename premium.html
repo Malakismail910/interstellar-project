@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Premium</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; 
+      
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('galaxy4.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* NAVBAR STYLE */
+    .navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1rem 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-center {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-center a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-center a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  bottom: -4px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-center a:hover::after {
+  width: 100%;
+}
+
+.nav-center a:hover {
+  color: #ccc;
+}
+
+.nav-center a.active {
+  color: #6a70b2;
+  font-weight: bold;
+}
+
+
+    .premium-container {
+      display: flex;
+      gap: 5vw;
+      padding: 2rem;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding-top: 80px; 
+    }
+
+    .box {
+      width: 400px;
+      height: 300px;
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+
+    .box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .label {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .preview-container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .box {
+        width: 80vw;
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+    <a href="preview.html" >Preview</a>
+    <a href="premium.html" class="active">Premium</a>
+  </div>
+</div>
+
+
+  <div class="premium-container">
+    <div class="box" onclick="location.href='star.html'">
+      <img src="star2.jpg" alt="Cosmic Objects">
+      <div class="label">Name your Star</div>
+    </div>
+    <div class="box" onclick="location.href='space.html'">
+      <img src="rokcet.jpg" alt="Planets">
+      <div class="label">Book your Space Flight </div>
+    </div>
+  </div>
+</body>
+</html>

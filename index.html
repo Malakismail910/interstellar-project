@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>INTERSTALLER</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .background {
+      background-image: url('galaxy3.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .saturn-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .content-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background-color: rgba(244, 243, 246, 0.3);
+      color: white;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      box-shadow: 0 0 30px rgba(244, 243, 246, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .content-box h1 {
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 54px;
+      font-style: oblique;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .content-box p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .buttons a {
+    
+      padding: 8px 16px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      background-color: #ffffff2f;
+      transition: background 0.3s ease;
+      text-decoration: underline;
+    }
+
+    .buttons a:hover {
+      color: #1e2a4b;
+      background-color: #ffffff8f;
+    }
+
+    
+    .ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 60px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.25) 0%, transparent 80%);
+      border-radius: 50%;
+      z-index: 1;
+      animation: spin 15s linear infinite;
+      transform-origin: center center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes spin {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="saturn-container">
+      <div class="ring"></div>
+      <div class="content-box">
+        <h1>INTERSTALLER</h1>
+        <p>
+          Explore the vastness of the <strong>UNIVERSE!</strong><br>
+          Discover galaxies, stars, and planets beyond our imagination. <br>
+          Learn about nebulae, black holes, and more!<br>
+          Join our cosmic journey 🌌
+        </p>
+        <div class="buttons">
+          <a href="register.html">Register</a>
+          <a href="preview.html">Preview</a>
+          <a href="login.html">Login</a>
+          <a href="premium.html">Premium</a>  
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

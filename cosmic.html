@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cosmic Objects Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+    .object-container { width: 100vw; height: 100vh; display: flex; flex-direction: row; transition: transform 1s ease-in-out; }
+    .object-slide { flex: 0 0 100vw; height: 100vh; position: relative; background-size: cover; background-position: center; }
+    .overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 3rem; color: #fff; text-shadow: 2px 2px 5px #000;
+      opacity: 0; transform: translateY(100px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .overlay.show { opacity: 1; transform: translateY(0); }
+    .overlay h1 { font-size: 4rem; margin-bottom: 1rem; text-transform: uppercase; }
+    .overlay p { font-size: 1.6rem; max-width: 800px; line-height: 1.6; text-align: center; margin-bottom: 2rem; }
+    .play-btn {
+      padding: 1rem 2rem; font-size: 1rem; background: rgba(255,255,255,0.2);
+      border: 2px solid #fff; color: #fff; border-radius: 5px; cursor: pointer;
+      transition: background 0.3s;
+    }
+    .play-btn:hover { background: rgba(255,255,255,0.4); }
+    .video-container {
+      display: none; position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh; background: rgba(0,0,0,0.8);
+      justify-content: center; align-items: center;
+    }
+    .video-container video { width: 80vw; height: auto; object-fit: cover; }
+    .close-btn {
+      position: absolute; top: 20px; right: 20px;
+      font-size: 1.5rem; background: rgba(0,0,0,0.5); color: #fff;
+      border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px;
+    }
+    .close-btn:hover { background: rgba(0,0,0,0.7); }
+  </style>
+</head>
+<body>
+  <div class="object-container" id="objectContainer">
+    <div class="object-slide" style="background-image: url('cygnus.jpg')">
+      <div class="overlay">
+        <h1>Cygnus Loop</h1>
+        <p>The Cygnus Loop (also known as the Veil Nebula) is a supernova remnant, the remains of the explosive death of a massive star. This 3D model is the result of a simulation describing the interaction of a blast wave from the explosion with an isolated cloud of the interstellar medium (that is, dust and gas in between the stars). Chandra sees the blast wave and other material that has been heated to millions of degrees. The Cygnus Loop is a highly extended, but faint, structure on the sky: At three degrees across, it has the diameter of six full moons....</p>
+        <button class="play-btn" onclick="openVideo('cygnus.mp4')">Press to See 3D Model</button>
+      </div>
+    </div>
+    <div class="object-slide" style="background-image: url('casa.jpg')">
+      <div class="overlay">
+        <h1>Cassiopeia A (Cas A)</h1>
+        <p>Using NASA’s James Webb Space Telescope, astronomers uncovered a mysterious feature within the remnant, nicknamed the “Green Monster,” alongside a puzzling network of ejecta filaments forming a web of oxygen-rich material. When combined with X-rays from Chandra, the data helped astronomers shed light on the origin of the Green Monster and revealed new insights into the explosion that created Cas A about 340 years ago, from Earth’s perspective....</p>
+        <button class="play-btn" onclick="openVideo('casa.mp4')">Press to See 3D Model</button>
+      </div>
+    </div>
+    <div class="object-slide" style="background-image: url('G292.0.jpg')">
+      <div class="overlay">
+        <h1>G292.0+1.8</h1>
+        <p>This is a rare type of supernova remnant observed to contain large amounts of oxygen. The X-ray image of G292.0+1.8 from Chandra shows a rapidly expanding, intricately structured field left behind by the shattered star. By creating a 3D model of the system, astronomers have been able to examine the asymmetrical shape of the remnant that can be explained by a “reverse” shock wave moving back toward the original explosion....</p>
+        <button class="play-btn" onclick="openVideo('G292.0.mp4')">Press to See 3D Model</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="video-container" id="videoContainer">
+    <video id="videoPlayer" controls>
+      <source id="videoSource" src="" type="video/mp4">
+    </video>
+    <button class="close-btn" onclick="closeVideo()">X</button>
+  </div>
+
+  <script>
+    const container = document.getElementById('objectContainer');
+    const slides = Array.from(container.children);
+    let index = 0;
+    function showSlide(i) {
+      container.style.transform = `translateX(-${i * 100}vw)`;
+      slides.forEach((slide, idx) => {
+        const ov = slide.querySelector('.overlay');
+        if (idx === i) ov.classList.add('show'); else ov.classList.remove('show');
+      });
+    }
+    window.addEventListener('wheel', e => {
+      index = e.deltaY>0 ? Math.min(index+1,slides.length-1):Math.max(index-1,0);
+      showSlide(index);
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key==='ArrowRight') index = Math.min(index+1,slides.length-1);
+      if (e.key==='ArrowLeft') index = Math.max(index-1,0);
+      showSlide(index);
+    });
+    showSlide(0);
+
+    const videoContainer = document.getElementById('videoContainer');
+    const videoPlayer = document.getElementById('videoPlayer');
+    function openVideo(src) {
+      videoPlayer.src = src;
+      videoContainer.style.display = 'flex';
+      videoPlayer.play();
+    }
+    function closeVideo() {
+      videoContainer.style.display = 'none'; videoPlayer.pause(); videoPlayer.currentTime=0;
+    }
+    videoContainer.addEventListener('click', e => { if(e.target===videoContainer) closeVideo(); });
+  </script>
+</body>
+</html>

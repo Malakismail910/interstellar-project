@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Your Spaceflight</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    .navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1rem 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-center {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-center a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-center a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  bottom: -4px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-center a:hover::after {
+  width: 100%;
+}
+
+.nav-center a:hover {
+  color: #ccc;
+}
+
+.nav-center a.active {
+  color: #6a70b2;
+  font-weight: bold;
+}
+
+    .background {
+      background: url('rokcet1.jpg') no-repeat center/cover;
+      height: 100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+    .saturn-container {
+      position: relative;
+      width: 500px; height: 500px;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-10px); }
+    }
+    .content-box {
+      width: 700px;
+      max-width: 90%;
+      padding: 40px;
+      border-radius: 20px;
+     
+      background: rgba(176, 174, 180, 0.3);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      padding:20px;
+      text-shadow: 1px 1px 4px #000;
+    }
+    h1 { font-size:42px; font-style:oblique; margin-bottom:15px; }
+    p { font-size:14px; line-height:1.5; }
+    .buttons {
+      margin-top:20px;
+    }
+    .buttons button {
+      padding:10px 20px; margin:0 10px;
+      border:none; border-radius:25px;
+      background:#0000002f; color:rgb(248, 246, 246);
+      font-weight:bold; cursor:pointer;
+      transition: background 0.3s;
+      text-decoration:underline;
+    }
+    .buttons button:hover {
+      background:#ffffff8f; color:#1e2a4b;
+    }
+    form {
+      width:100%; display:flex;
+      flex-direction:column; align-items:center;
+      gap:12px; margin-top:10px;
+    }
+    .field {
+      width: 80%; text-align:left;
+    }
+    .field label {
+      display:block; margin-bottom:4px;
+      font-size:0.9rem; color: #f6ebeb  ;
+    }
+    
+    .field input,
+    .field select {
+      width:100%;
+      padding:8px 4px;
+      border:none;
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      background: transparent;
+      color: #040e1c;
+      font-size:1rem;
+      outline: none;
+    }
+    .field input::placeholder,
+    .field select option[value=""] {
+      color: rgba(255,255,255,0.7);
+    }
+    .form-submit {
+      margin-top:10px;
+      padding:10px 30px;
+      border:none;
+      border-radius:25px;
+      background: linear-gradient(135deg, #ffd700, #ffae00);
+      color:#000;
+      font-weight:bold;
+      cursor:pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .form-submit:hover {
+      transform:scale(1.05);
+      box-shadow:0 0 15px rgba(255,200,0,0.7);
+    }
+    .hidden { display:none; }
+    .confirm p { margin:10px 0; font-size:14px; }
+    .highlight { color:#ffd700; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="nav-center">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="preview.html" >Preview</a>
+      <a href="premium.html" class="active">Premium</a>
+    </div>
+  </div>
+
+  <div class="background">
+    <div class="saturn-container">
+      <div class="ring"></div>
+      <div class="content-box" id="box">
+
+        <!-- Intro -->
+        <div id="intro">
+          <h1>Book Your Spaceflight</h1>
+          <p>
+            Ready for liftoff? 🚀<br>
+            Reserve your seat to orbit Earth or travel beyond!<br>
+            Click below to begin.
+          </p>
+          <div class="buttons">
+            <button onclick="showForm()">Reserve Now</button>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div id="form" class="hidden">
+          <h1>Enter Details</h1>
+          <form onsubmit="confirmBooking(event)">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="provider">Flight Provider</label>
+              <select id="provider" required>
+                <option value="" disabled selected hidden>Select Provider</option>
+                <option value="SpaceX">SpaceX</option>
+                <option value="BlueOrigin">Blue Origin</option>
+                <option value="VirginGalactic">Virgin Galactic</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">Launch Date</label>
+              <input type="date" id="date" required>
+            </div>
+            <div class="field">
+              <label for="passengers">Passengers</label>
+              <input type="number" id="passengers" min="1" value="1" required>
+            </div>
+            <button class="form-submit" type="submit">Confirm Reservation</button>
+          </form>
+        </div>
+
+        <!-- Confirmation -->
+        <div id="confirm" class="hidden confirm">
+          <h1>Reservation Confirmed!</h1>
+          <p>Thank you, <span class="highlight" id="cName"></span>.</p>
+          <p>Provider: <span class="highlight" id="cProvider"></span></p>
+          <p>Launch Date: <span class="highlight" id="cDate"></span></p>
+          <p>Passengers: <span class="highlight" id="cPassengers"></span></p>
+          <p>Email: <span class="highlight" id="cEmail"></span></p>
+          <p>Cost: <span class="highlight" id="cCost"></span></p>
+          <p>Launch Site: <span class="highlight" id="cSite"></span></p>
+          <div class="buttons">
+            <button onclick="restart()">Book A gain</button>
+           
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      SpaceX:          { cost:'$550,000', site:'Kennedy Space Center, FL' },
+      BlueOrigin:     { cost:'$250,000', site:'West Texas Launch Site' },
+      VirginGalactic: { cost:'$300,000', site:'Spaceport America, NM' }
+    };
+    const intro      = document.getElementById('intro');
+    const form       = document.getElementById('form');
+    const confirm    = document.getElementById('confirm');
+    const nameInput  = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const provider   = document.getElementById('provider');
+    const dateInput  = document.getElementById('date');
+    const passengers = document.getElementById('passengers');
+    const cName      = document.getElementById('cName');
+    const cEmail     = document.getElementById('cEmail');
+    const cProvider  = document.getElementById('cProvider');
+    const cDate      = document.getElementById('cDate');
+    const cPassengers= document.getElementById('cPassengers');
+    const cCost      = document.getElementById('cCost');
+    const cSite      = document.getElementById('cSite');
+
+    function showForm(){
+      intro.classList.add('hidden');
+      form.classList.remove('hidden');
+    }
+    function confirmBooking(e){
+      e.preventDefault();
+      cName.innerText = nameInput.value;
+      cEmail.innerText = emailInput.value;
+      cProvider.innerText = provider.value;
+      cDate.innerText = new Date(dateInput.value).toLocaleDateString();
+      cPassengers.innerText = passengers.value;
+      const info = data[provider.value];
+      cCost.innerText = info.cost;
+      cSite.innerText = info.site;
+      form.classList.add('hidden');
+      confirm.classList.remove('hidden');
+    }
+    function restart(){
+      confirm.classList.add('hidden');
+      intro.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

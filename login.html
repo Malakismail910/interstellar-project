@@ -1,0 +1,187 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title >log in – INTERSTALLER</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    .background {
+      background: url('galaxy3.jpg') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1rem 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+
+.nav-center {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-center a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-center a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  bottom: -4px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-center a:hover::after {
+  width: 100%;
+}
+
+.nav-center a:hover {
+  color: #ccc;
+}
+
+.nav-center a.active {
+  color: #6a70b2;
+  font-weight: bold;
+}
+
+
+input {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 10px 0;
+  background-color: transparent;
+  border: none; 
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3); 
+  color: white; 
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  outline: none; 
+}
+
+
+    .content-box {
+      width: 500px;
+      max-width: 90%;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+  
+      color: white;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    .content-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+    .content-box label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .content-box input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+    .content-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      background: #9eabce;
+      color: #1e2a4b;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    .content-box button:hover {
+      background: #b4bedd;
+    }
+    .content-box .register-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .content-box .register-link a {
+      color: #9eabce;
+      text-decoration: none;
+    }
+    .content-box .register-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+    <div class="navbar">
+      <div class="nav-center">
+        <a href="./index.html">Home</a>
+        <a href="login.html" class="active">Login</a>
+        <a href="register.html">Register</a>
+        <a href="preview.html">Preview</a>
+        <a href="premium.html" >Premium</a>
+      </div>
+      </div>
+      
+  <div class="background">
+    <div class="content-box">
+      <h2>Hello Again 🪐</h2>
+      <form action="/login" method="POST">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+        <button type="submit">Login</button>
+      </form>
+      <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault(); 
+      
+         
+          const email = document.getElementById('email').value;
+          localStorage.setItem('userEmail', email);
+      
+        
+          window.location.href = 'preview.html';
+        });
+      </script>
+      <div class="register-link">
+        Don't have an account? <a href="register.html">Create an Account</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

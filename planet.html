@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planet Preview</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    .planet-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: row;
+      transition: transform 1s ease-in-out;
+    }
+
+    .planet-slide {
+      flex: 0 0 100vw;
+      height: 100vh;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;  
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;  
+      opacity: 0;
+      transform: translateY(100px); 
+      transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+
+    .overlay h1 {
+      font-size: 5rem; 
+      margin-bottom: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .overlay p {
+      font-size: 2rem; 
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="planet-container" id="planetContainer">
+    <div class="planet-slide" style="background-image: url('mercury.jpg');">
+      <div class="overlay">
+        <h1>MERCURY</h1>
+        <p>Mercury is the closest planet to the Sun and also the smallest in the solar system. It has no atmosphere to protect it, so temperatures swing from extremely hot to freezing cold. A day on Mercury is longer than its year!</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('venus.jpg');">
+      <div class="overlay">
+        <h1>VENUS</h1>
+        <p>Venus is the second planet from the Sun and is often called Earth’s twin because of its similar size. However, its thick atmosphere traps heat, making it the hottest planet in our solar system.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('earth.jpg');">
+      <div class="overlay">
+        <h1>EARTH</h1>
+        <p>Earth is the third planet from the Sun and the only known place in the universe that supports life. It has a perfect balance of air, water, and temperature that makes it home to millions of species.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('mars.jpg');">
+      <div class="overlay">
+        <h1>MARS</h1>
+        <p>Mars, known as the Red Planet, is the fourth from the Sun. Its red color comes from iron-rich dust. Scientists are fascinated by Mars because of signs that water once flowed there, hinting at possible past life.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('juno.jpg');">
+      <div class="overlay">
+        <h1>JUPITER</h1>
+        <p>Jupiter is the largest planet in the solar system. It’s made mostly of gas and has a giant storm called the Great Red Spot. Jupiter also has more than 90 moons, including the huge moon Ganymede.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('saturn.jpg');">
+      <div class="overlay">
+        <h1>SATURN</h1>
+        <p>Saturn is famous for its stunning rings, which are made of ice and rock. It's the second largest planet and is mostly made of gas, like Jupiter. Its rings can be seen even with a small telescope.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('uranus.jpg');">
+      <div class="overlay">
+        <h1>URANUS</h1>
+        <p>Uranus is an ice giant with a pale blue color caused by methane in its atmosphere. It’s unique because it rotates on its side, making its seasons last over 20 years each!</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('neptune.jpg');">
+      <div class="overlay">
+        <h1>NEPTUNE</h1>
+        <p>Neptune is the farthest known major planet from the Sun. It has strong winds—the fastest in the solar system—and a deep blue color. Neptune is cold and mysterious, with 14 known moons.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('pluto.jpg');">
+      <div class="overlay">
+        <h1>PLUTO</h1>
+        <p>Pluto used to be called the ninth planet, but now it’s classified as a dwarf planet. It’s small, icy, and located in the Kuiper Belt. Despite its size, Pluto has five moons and a surprisingly active surface.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('ceres.jpg');">
+      <div class="overlay">
+        <h1>CERES</h1>
+        <p>Ceres is the largest object in the asteroid belt between Mars and Jupiter. It’s a dwarf planet and has water ice under its surface, which makes scientists think it might once have had—or still have—some form of life.</p>
+      </div>
+    </div>
+
+    <div class="planet-slide" style="background-image: url('eris.jpg');">
+      <div class="overlay">
+        <h1>ERIS</h1>
+        <p>Eris is one of the most distant known dwarf planets. It's even more massive than Pluto and orbits the Sun in the icy outer region of the solar system. Its discovery played a big role in changing Pluto's planetary status.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('planetContainer');
+    let index = 0;
+    const totalSlides = container.children.length;
+
+    function showSlide(i) {
+      container.style.transform = `translateX(-${i * 100}vw)`;
+
+      
+      const allSlides = container.querySelectorAll('.planet-slide');
+      allSlides.forEach(slide => {
+        const overlay = slide.querySelector('.overlay');
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'translateY(100px)';
+      });
+
+      // تفعيل التأثير النصي للشريحة الحالية
+      const currentSlide = container.children[i];
+      const overlay = currentSlide.querySelector('.overlay');
+      overlay.style.opacity = '1';
+      overlay.style.transform = 'translateY(0)';
+    }
+
+    window.addEventListener('wheel', (e) => {
+      if (e.deltaY > 0) index = Math.min(index + 1, totalSlides - 1);
+      else index = Math.max(index - 1, 0);
+      showSlide(index);
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') index = Math.min(index + 1, totalSlides - 1);
+      if (e.key === 'ArrowLeft') index = Math.max(index - 1, 0);
+      showSlide(index);
+    });
+
+    
+    showSlide(index);
+  </script>
+</body>
+</html>
